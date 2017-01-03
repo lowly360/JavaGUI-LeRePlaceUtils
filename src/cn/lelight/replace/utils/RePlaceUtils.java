@@ -50,7 +50,7 @@ public class RePlaceUtils {
 	/**
 	 * 获取目录下所有文件名字以及路径
 	 */
-	private static List<FileBean> getFilesNameAndPath(String path) {
+	public static List<FileBean> getFilesNameAndPath(String path) {
 		List<FileBean> list = new ArrayList<>();
 		File file = new File(path);
 		if (file.exists()) {

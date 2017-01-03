@@ -10,6 +10,7 @@ import java.awt.event.AdjustmentListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -22,7 +23,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 
+import cn.lelight.replace.utils.FileBean;
 import cn.lelight.replace.utils.ImageUtils;
+import cn.lelight.replace.utils.RePlaceUtils;
 
 /**
  * Copyright 2016 Lelight
@@ -299,17 +302,27 @@ public class CutAndChangeColorPanle extends JPanel implements AdjustmentListener
 		// TODO Auto-generated method stub
 		if (arg0.getSource() == colorOne) {
 			mCurrenColor = 1;
-			setRGBColor();
+			// setRGBColor();
 		} else if (arg0.getSource() == colorTwo) {
 			mCurrenColor = 2;
-			setRGBColor();
+			// setRGBColor();
 		} else if (arg0.getSource() == srcFileButton) {
 			showFileChooserAndSetTextFild(inputSrcFile);
 		} else if (arg0.getSource() == startBtn) {
 			try {
 				System.out
 						.println("开始导出:" + inputSrcFile.getText() + "\n" + one.toString() + "  to  " + two.toString());
-				ImageUtils.replaceImageColor(inputSrcFile.getText(), one, two);
+				File file = new File(inputSrcFile.getText());
+				if (file.exists()) {
+					if (file.isDirectory()) {
+						List<FileBean> filesNameAndPath = RePlaceUtils.getFilesNameAndPath(file.getAbsolutePath());
+						for (FileBean bean : filesNameAndPath) {
+							ImageUtils.replaceImageColor(bean.path, one, two);
+						}
+					} else {
+						ImageUtils.replaceImageColor(inputSrcFile.getText(), one, two);
+					}
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

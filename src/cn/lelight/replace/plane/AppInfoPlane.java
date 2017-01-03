@@ -41,7 +41,7 @@ public class AppInfoPlane extends JPanel implements ActionListener {
 		setLayout(null);
 		// App Ãû
 		JLabel appIcon = new JLabel();
-		ImageIcon icon = new ImageIcon("D:\\itlowly\\Eclipse\\LeRePlaceUtils\\res\\icon.png");
+		ImageIcon icon = new ImageIcon(AppInfoPlane.class.getResource("/pic/icon.png"));
 		appIcon.setIcon(icon);
 		appIcon.setSize(167,167);
 		appIcon.setLocation(317, 32);
